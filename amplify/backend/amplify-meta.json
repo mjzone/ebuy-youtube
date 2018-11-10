@@ -1,0 +1,56 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "ebuy-20181025062056-authRole",
+			"UnauthRoleArn": "arn:aws:iam::885121665536:role/ebuy-20181025062056-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::885121665536:role/ebuy-20181025062056-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "ebuy-20181025062056-deployment",
+			"UnauthRoleName": "ebuy-20181025062056-unauthRole",
+			"StackName": "ebuy-20181025062056",
+			"StackId": "arn:aws:cloudformation:us-east-1:885121665536:stack/ebuy-20181025062056/0b990260-d7f0-11e8-82fa-500c28709a35"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2018-10-25T01:27:11.795Z",
+			"output": {
+				"CloudFrontSecureURL": "https://d1yubs7wi9jmi5.cloudfront.net",
+				"S3BucketSecureURL": "https://ebuy-ecommerce-app.s3.amazonaws.com",
+				"WebsiteURL": "http://ebuy-ecommerce-app.s3-website-us-east-1.amazonaws.com",
+				"CloudFrontDistributionID": "E2IC5CLDUHTM3A",
+				"Region": "us-east-1",
+				"HostingBucketName": "ebuy-ecommerce-app",
+				"CloudFrontDomainName": "d1yubs7wi9jmi5.cloudfront.net"
+			},
+			"lastPushDirHash": "Gy/5p1ph4u1euuKtCh20a6gigwQ="
+		}
+	},
+	"auth": {
+		"cognito81a50535": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/auth/cognito81a50535-cloudformation-template.yml",
+				"logicalId": "authcognito81a50535"
+			},
+			"lastPushTimeStamp": "2018-10-25T01:27:11.803Z",
+			"output": {
+				"AppClientSecret": "qq095pg2v3foko9s65f496bjpkerh21lb5bi59q0l2qmf7926oq",
+				"UserPoolId": "us-east-1_0VokOABk4",
+				"AppClientIDWeb": "1nh2j7eflfk37c5u2cmu7melvn",
+				"AppClientID": "76ggtj96iiu2co4i4b62hdur8i",
+				"IdentityPoolId": "us-east-1:36c7edf4-e74e-42b7-8667-77576515629a",
+				"IdentityPoolName": "cognito81a50535_identitypool_81a50535",
+				"UserPoolName": "cognito81a50535_userpool_81a50535"
+			},
+			"lastPushDirHash": "fBUkRmpFzPCvlNZUFONmGKywWTM="
+		}
+	}
+}
