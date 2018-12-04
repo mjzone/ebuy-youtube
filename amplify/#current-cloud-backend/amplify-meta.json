@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-10-25T01:27:11.795Z",
+			"lastPushTimeStamp": "2018-11-10T13:57:35.780Z",
 			"output": {
 				"CloudFrontSecureURL": "https://d1yubs7wi9jmi5.cloudfront.net",
 				"S3BucketSecureURL": "https://ebuy-ecommerce-app.s3.amazonaws.com",
@@ -40,7 +40,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/auth/cognito81a50535-cloudformation-template.yml",
 				"logicalId": "authcognito81a50535"
 			},
-			"lastPushTimeStamp": "2018-10-25T01:27:11.803Z",
+			"lastPushTimeStamp": "2018-11-10T13:57:35.783Z",
 			"output": {
 				"AppClientSecret": "qq095pg2v3foko9s65f496bjpkerh21lb5bi59q0l2qmf7926oq",
 				"UserPoolId": "us-east-1_0VokOABk4",
@@ -50,7 +50,83 @@
 				"IdentityPoolName": "cognito81a50535_identitypool_81a50535",
 				"UserPoolName": "cognito81a50535_userpool_81a50535"
 			},
-			"lastPushDirHash": "fBUkRmpFzPCvlNZUFONmGKywWTM="
+			"lastPushDirHash": "Z5fJurSsLHvQHTO9P8TYbGMPo+8="
+		}
+	},
+	"storage": {
+		"dynamo74fb9248": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/storage/dynamo74fb9248-cloudformation-template.json",
+				"logicalId": "storagedynamo74fb9248"
+			},
+			"lastPushTimeStamp": "2018-11-10T13:57:35.789Z",
+			"output": {
+				"PartitionKeyName": "id",
+				"Region": "us-east-1",
+				"Arn": "arn:aws:dynamodb:us-east-1:885121665536:table/products",
+				"PartitionKeyType": "S",
+				"Name": "products"
+			},
+			"lastPushDirHash": "DRvXdmp2xF1prIhuAJi3J8vF138="
+		}
+	},
+	"function": {
+		"ebuyedbb35ad": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "dynamo74fb9248",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"lastBuildTimeStamp": "2018-11-10T01:18:27.559Z",
+			"lastPackageTimeStamp": "2018-11-10T13:54:12.935Z",
+			"distZipFilename": "ebuyedbb35ad-1541858044-latest-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/function/ebuyedbb35ad-cloudformation-template.json",
+				"logicalId": "functionebuyedbb35ad"
+			},
+			"lastPushTimeStamp": "2018-11-10T13:57:35.792Z",
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:885121665536:function:ebuyedbb35ad",
+				"Name": "ebuyedbb35ad"
+			},
+			"lastPushDirHash": "UPLnDWLRuwyELy/EXIM4BY9pIx0="
+		}
+	},
+	"api": {
+		"ebuyapi": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "ebuyedbb35ad",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/api/ebuyapi-cloudformation-template.json",
+				"logicalId": "apiebuyapi"
+			},
+			"lastPushTimeStamp": "2018-11-10T13:57:35.790Z",
+			"output": {
+				"ApiName": "ebuyapi",
+				"RootUrl": "https://pli1a7m6bh.execute-api.us-east-1.amazonaws.com/Prod"
+			},
+			"lastPushDirHash": "xlv+OYbkc6Ui3AJwnnCpyUEukVk="
 		}
 	}
 }

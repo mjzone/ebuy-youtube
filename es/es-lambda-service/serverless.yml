@@ -1,0 +1,17 @@
+service: es-lambda-service 
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+  role: arn:aws:iam::<account-id>:role/ebuy-es-role
+  vpc:
+    securityGroupIds:
+      - sg-8c2c5df2
+    subnetIds:
+      - subnet-99e5242d
+      - subnet-99ea2106
+
+functions:
+  es:
+    handler: handler.es

@@ -8,7 +8,6 @@ import { environment } from './environments/environment';
 
 Amplify.configure(amplify);
 
-
 const oauth = {
   // Domain name
   domain : 'ebuy-web.auth.us-east-1.amazoncognito.com', 

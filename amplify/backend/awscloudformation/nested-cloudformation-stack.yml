@@ -91,7 +91,7 @@
 				"TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/auth/cognito81a50535-cloudformation-template.yml",
 				"Parameters": {
 					"identityPoolName": "cognito81a50535_identitypool_81a50535",
-					"allowUnauthenticatedIdentities": false,
+					"allowUnauthenticatedIdentities": true,
 					"thirdPartyAuth": false,
 					"lambdaLogPolicy": "cognito81a50535_lambda_log_policy",
 					"openIdLambdaRoleName": "cognito81a50535_openid_lambda_role",
@@ -132,6 +132,57 @@
 					"authRoleArn": "arn:aws:iam::885121665536:role/ebuy-20181025062056-authRole",
 					"resourceName": "cognito81a50535",
 					"authSelections": "identityPoolAndUserPool"
+				}
+			}
+		},
+		"storagedynamo74fb9248": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/storage/dynamo74fb9248-cloudformation-template.json",
+				"Parameters": {
+					"tableName": "products",
+					"partitionKeyName": "id",
+					"partitionKeyType": "S"
+				}
+			}
+		},
+		"functionebuyedbb35ad": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/function/ebuyedbb35ad-cloudformation-template.json",
+				"Parameters": {
+					"storagedynamo74fb9248Name": {
+						"Fn::GetAtt": [
+							"storagedynamo74fb9248",
+							"Outputs.Name"
+						]
+					},
+					"storagedynamo74fb9248Arn": {
+						"Fn::GetAtt": [
+							"storagedynamo74fb9248",
+							"Outputs.Arn"
+						]
+					}
+				}
+			}
+		},
+		"apiebuyapi": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/ebuy-20181025062056-deployment/amplify-cfn-templates/api/ebuyapi-cloudformation-template.json",
+				"Parameters": {
+					"functionebuyedbb35adName": {
+						"Fn::GetAtt": [
+							"functionebuyedbb35ad",
+							"Outputs.Name"
+						]
+					},
+					"functionebuyedbb35adArn": {
+						"Fn::GetAtt": [
+							"functionebuyedbb35ad",
+							"Outputs.Arn"
+						]
+					}
 				}
 			}
 		}
